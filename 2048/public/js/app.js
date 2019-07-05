@@ -1865,11 +1865,57 @@ __webpack_require__.r(__webpack_exports__);
     for (var i = 0; i < 2; i++) {
       var randrow = Math.random() * 4;
       var randTile = Math.random() * 4;
-      console.log(randrow);
       this.grid[Math.floor(randrow)][Math.floor(randTile)] = 2;
     }
   },
-  methods: {}
+  methods: {
+    // creating a new row if movement happened
+    moveRight: function moveRight() {
+      var newGrid = [];
+      this.grid.forEach(function (row) {
+        var newRow = [0, 0, 0, 0];
+        row.forEach(function (tile, index) {
+          if (index < 2) {
+            newRow[index + 1] = tile;
+          } else if (index === 2) {
+            newRow[index + 1] = row[index + 1] + tile;
+          }
+        });
+        newGrid.push(newRow);
+      });
+      this.grid = newGrid;
+      console.log(this.grid);
+    },
+    moveLeft: function moveLeft() {
+      console.log('moved left');
+    },
+    moveUp: function moveUp() {
+      console.log('moved up');
+    },
+    moveDown: function moveDown() {
+      console.log('moved down');
+    }
+  },
+  mounted: function mounted() {
+    var that = this;
+    window.addEventListener('keydown', function (e) {
+      if (e.keyCode === 39) {
+        that.moveRight();
+      }
+
+      if (e.keyCode === 37) {
+        that.moveLeft();
+      }
+
+      if (e.keyCode === 38) {
+        that.moveUp();
+      }
+
+      if (e.keyCode === 40) {
+        that.moveDown();
+      }
+    });
+  }
 });
 
 /***/ }),
