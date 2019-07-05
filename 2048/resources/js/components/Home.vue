@@ -27,11 +27,13 @@
             }
         },
         created () {
-            this.grid.forEach(row => {
-                if (true) {
-                    
-                }
-            });
+            // Initiliazing two randomly placed tokens
+            for (let i = 0; i < 2; i++) {
+                let randrow = Math.random() * 4
+                let randTile = Math.random() * 4
+                console.log(randrow)
+                this.grid[Math.floor(randrow)][Math.floor(randTile)] = 2
+            }
         },
         methods: {
 

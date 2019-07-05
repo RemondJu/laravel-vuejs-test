@@ -1861,9 +1861,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.grid.forEach(function (row) {
-      if (true) {}
-    });
+    // Initiliazing two randomly placed tokens
+    for (var i = 0; i < 2; i++) {
+      var randrow = Math.random() * 4;
+      var randTile = Math.random() * 4;
+      console.log(randrow);
+      this.grid[Math.floor(randrow)][Math.floor(randTile)] = 2;
+    }
   },
   methods: {}
 });
