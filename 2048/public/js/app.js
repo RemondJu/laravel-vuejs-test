@@ -1861,14 +1861,22 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    // Initiliazing two randomly placed tokens
-    for (var i = 0; i < 2; i++) {
-      var randrow = Math.random() * 4;
-      var randTile = Math.random() * 4;
-      this.grid[Math.floor(randrow)][Math.floor(randTile)] = 2;
-    }
+    this.generateRandomTokens();
   },
   methods: {
+    // Initiliazing two randomly placed tokens
+    generateRandomTokens: function generateRandomTokens() {
+      for (var i = 0; i < 2; i++) {
+        var randrow = Math.random() * 4;
+        var randTile = Math.random() * 4;
+
+        if (this.grid[Math.floor(randrow)][Math.floor(randTile)] === 0) {
+          this.grid[Math.floor(randrow)][Math.floor(randTile)] = 2;
+        } else {
+          this.generateRandomTokens();
+        }
+      }
+    },
     // creating a new row if movement happened
     moveRight: function moveRight() {
       var newGrid = [];
@@ -1884,7 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
         newGrid.push(newRow);
       });
       this.grid = newGrid;
-      console.log(this.grid);
+      this.generateRandomTokens();
     },
     moveLeft: function moveLeft() {
       console.log('moved left');

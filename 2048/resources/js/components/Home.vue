@@ -21,20 +21,27 @@
                     [0, 0, 0, 0],
                     [0, 0, 0, 0],
                     [0, 0, 0, 0],
-                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]
                 ],
                 rowValues: []
             }
         },
         created () {
-            // Initiliazing two randomly placed tokens
-            for (let i = 0; i < 2; i++) {
-                let randrow = Math.random() * 4
-                let randTile = Math.random() * 4
-                this.grid[Math.floor(randrow)][Math.floor(randTile)] = 2
-            }
+            this.generateRandomTokens()
         },
         methods: {
+            // Initiliazing two randomly placed tokens
+            generateRandomTokens () {
+                for (let i = 0; i < 2; i++) {
+                    let randrow = Math.random() * 4
+                    let randTile = Math.random() * 4
+                    if (this.grid[Math.floor(randrow)][Math.floor(randTile)] === 0) {
+                        this.grid[Math.floor(randrow)][Math.floor(randTile)] = 2
+                    } else {
+                        this.generateRandomTokens()
+                    }
+                }
+            },
             // creating a new row if movement happened
             moveRight() {
                 let newGrid = []
@@ -51,7 +58,7 @@
                     newGrid.push(newRow)
                 });
                 this.grid = newGrid
-                console.log(this.grid)
+                this.generateRandomTokens()
             },
             moveLeft() {
                 console.log('moved left')
